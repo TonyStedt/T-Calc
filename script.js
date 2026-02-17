@@ -37,8 +37,12 @@ class RPNCalculator {
 
     handleNumber(char) {
         // Validate input for base
-        if (this.base !== 16 && /[a-fA-F]/.test(char)) return;
-        if (this.base !== 10 && char === '.') return; // No decimals in non-DEC for now
+        if (char === '.') {
+            if (this.base !== 10) return;
+        } else {
+            const val = parseInt(char, 16);
+            if (isNaN(val) || val >= this.base) return;
+        }
 
         if (!this.isInputting) {
             this.inputBuffer = '';
@@ -229,10 +233,25 @@ class RPNCalculator {
             btn.classList.toggle('active', parseInt(btn.dataset.base) === b);
         });
 
-        // Toggle Hex Keys
-        document.querySelectorAll('.hex-key').forEach(key => {
-            if (b === 16) key.classList.remove('disabled');
-            else key.classList.add('disabled');
+        // Update Key Availability
+        document.querySelectorAll('button[data-num]').forEach(key => {
+            const val = key.dataset.num;
+            let enabled = true;
+
+            if (val === '.') {
+                // Decimal point only available in Base 10
+                enabled = (b === 10);
+            } else {
+                // Check if digit is valid in base
+                const numVal = parseInt(val, 16);
+                enabled = (numVal < b);
+            }
+
+            if (enabled) {
+                key.classList.remove('disabled');
+            } else {
+                key.classList.add('disabled');
+            }
         });
 
         this.modeEl.textContent = b === 10 ? '' : `BASE ${b}`;

@@ -107,9 +107,11 @@ body {
     color: #ddd;
 }
 
-.hex-key.disabled {
+.key.disabled {
     opacity: 0.3;
     pointer-events: none;
+    box-shadow: none;
+    transform: none;
 }
 
 .key {
