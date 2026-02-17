@@ -8,6 +8,7 @@ class RPNCalculator {
 
         this.displayEl = document.getElementById('main-display');
         this.modeEl = document.getElementById('indicator-mode');
+        this.stackEl = document.getElementById('indicator-stack');
 
         this.init();
     }
@@ -209,6 +210,7 @@ class RPNCalculator {
             this.stack.push(num);
             this.inputBuffer = '';
             this.isInputting = false;
+            this.updateDisplay();
         }
     }
 
@@ -261,6 +263,7 @@ class RPNCalculator {
     updateDisplay(val = null) {
         if (val !== null && typeof val === 'string') {
             this.displayEl.textContent = val.toUpperCase();
+            this.updateStackDisplay();
             return;
         }
 
@@ -280,6 +283,19 @@ class RPNCalculator {
 
         this.displayEl.textContent = str;
         console.log('Stack:', this.stack, 'Buffer:', this.inputBuffer);
+        this.updateStackDisplay();
+    }
+
+    updateStackDisplay() {
+        if (!this.stackEl) return;
+
+        let stackStr = this.stack.map(num => {
+            let n = Number(num);
+            if (isNaN(n)) return 'Error';
+            return n.toString(this.base).toUpperCase();
+        }).join(' ');
+
+        this.stackEl.textContent = stackStr;
     }
 
     handleKeyboard(e) {
