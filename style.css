@@ -96,6 +96,14 @@ body {
     opacity: 0.7;
 }
 
+.stack-indicator {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
 .keypad {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
