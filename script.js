@@ -36,6 +36,10 @@ class RPNCalculator {
     }
 
     handleNumber(char) {
+        // Validate input for base
+        if (this.base !== 16 && /[a-fA-F]/.test(char)) return;
+        if (this.base !== 10 && char === '.') return; // No decimals in non-DEC for now
+
         if (!this.isInputting) {
             this.inputBuffer = '';
             this.isInputting = true;
@@ -189,7 +193,16 @@ class RPNCalculator {
             this.updateDisplay(val);
         } else {
             if (this.inputBuffer === '') return; // Don't push empty
-            this.stack.push(parseFloat(this.inputBuffer));
+
+            let num;
+            if (this.base === 10) {
+                num = parseFloat(this.inputBuffer);
+            } else {
+                // Integer parse for other bases
+                num = parseInt(this.inputBuffer, this.base);
+            }
+
+            this.stack.push(num);
             this.inputBuffer = '';
             this.isInputting = false;
         }
@@ -210,15 +223,28 @@ class RPNCalculator {
     }
 
     setBase(b) {
+        if (this.isInputting) this.pushStack(); // Commit current input before switching
         this.base = b;
         document.querySelectorAll('.base-btn').forEach(btn => {
             btn.classList.toggle('active', parseInt(btn.dataset.base) === b);
         });
+
+        // Toggle Hex Keys
+        document.querySelectorAll('.hex-key').forEach(key => {
+            if (b === 16) key.classList.remove('disabled');
+            else key.classList.add('disabled');
+        });
+
         this.modeEl.textContent = b === 10 ? '' : `BASE ${b}`;
         this.updateDisplay();
     }
 
     updateDisplay(val = null) {
+        if (val !== null && typeof val === 'string') {
+            this.displayEl.textContent = val.toUpperCase();
+            return;
+        }
+
         let displayVal = val;
         if (displayVal === null) {
             if (this.stack.length > 0) displayVal = this.stack[this.stack.length - 1];
@@ -240,6 +266,7 @@ class RPNCalculator {
     handleKeyboard(e) {
         const key = e.key;
         if (isFinite(key)) this.handleNumber(key);
+        if (this.base === 16 && /^[a-fA-F]$/.test(key)) this.handleNumber(key.toUpperCase());
         if (['+', '-', '*', '/'].includes(key)) this.handleOperator(key);
         if (key === 'Enter') { e.preventDefault(); this.handleCommand('enter'); }
         if (key === 'Backspace') this.handleCommand('backspace');
