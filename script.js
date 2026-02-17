@@ -41,6 +41,7 @@ class RPNCalculator {
         if (char === '.') {
             if (this.base !== 10) return;
         } else {
+            // Allow input if it's a valid digit for the base
             const val = parseInt(char, 16);
             if (isNaN(val) || val >= this.base) return;
         }
@@ -52,6 +53,13 @@ class RPNCalculator {
 
         // Prevent multiple dots
         if (char === '.' && this.inputBuffer.includes('.')) return;
+
+        // Prevent multiple 'e' (handled by EEX logic usually, but if typing manually...)
+        // Actually handleNumber is called by keys. 'e' key is restricted to HEX mode? 
+        // Wait, 'e' is a hex digit. In Decimal mode, 'e' comes from EEX button, not 'e' key.
+        // But if user types 'e' on keyboard?
+        // Let's assume handleNumber receives digits 0-9, A-F, and ..
+        // EEX logic appends 'e'. 
 
         this.inputBuffer += char;
         this.updateDisplay(this.inputBuffer);
@@ -115,10 +123,35 @@ class RPNCalculator {
             case 'rcl':
                 this.pushStack(this.memory, true);
                 break;
+            case 'eex':
+                if (this.base !== 10) return; // Scientific notation only for Base 10 usually
+                if (!this.isInputting) {
+                    this.inputBuffer = '1';
+                    this.isInputting = true;
+                }
+                if (this.inputBuffer.includes('e')) return; // Already has exponent
+                this.inputBuffer += 'e';
+                this.updateDisplay(this.inputBuffer);
+                break;
             case 'chs':
                 if (this.isInputting) {
-                    if (this.inputBuffer.startsWith('-')) this.inputBuffer = this.inputBuffer.substring(1);
-                    else this.inputBuffer = '-' + this.inputBuffer;
+                    if (this.inputBuffer.includes('e')) {
+                        // Toggle sign of exponent
+                        const parts = this.inputBuffer.split('e');
+                        let mantissa = parts[0];
+                        let exponent = parts[1] || ''; // could be empty if "5e"
+
+                        if (exponent.startsWith('-')) {
+                            exponent = exponent.substring(1);
+                        } else {
+                            exponent = '-' + exponent;
+                        }
+                        this.inputBuffer = mantissa + 'e' + exponent;
+                    } else {
+                        // Toggle sign of mantissa
+                        if (this.inputBuffer.startsWith('-')) this.inputBuffer = this.inputBuffer.substring(1);
+                        else this.inputBuffer = '-' + this.inputBuffer;
+                    }
                     this.updateDisplay(this.inputBuffer);
                 } else {
                     if (this.stack.length > 0) {
@@ -255,6 +288,13 @@ class RPNCalculator {
                 key.classList.add('disabled');
             }
         });
+
+        // Toggle EEX Button
+        const eexBtn = document.querySelector('button[data-cmd="eex"]');
+        if (eexBtn) {
+            if (b === 10) eexBtn.classList.remove('disabled');
+            else eexBtn.classList.add('disabled');
+        }
 
         this.modeEl.textContent = b === 10 ? '' : `BASE ${b}`;
         this.updateDisplay();

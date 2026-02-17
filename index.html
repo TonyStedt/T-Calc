@@ -29,32 +29,33 @@
             </div>
 
             <div class="keypad">
-                <!-- Row 1: Advanced Math & Stack -->
+                <!-- Row 1: Advanced Math & Entry -->
                 <button class="key hex-key disabled" data-num="A">A</button>
                 <button class="key small-key" data-op="sqrt">√x</button>
                 <button class="key small-key" data-op="sqr">x²</button>
+                <button class="key small-key" data-op="pow">yˣ</button>
+                <button class="key small-key" data-cmd="chs">CHS</button>
+                <div class="key-placeholder"></div>
+
+                <!-- Row 2: Logs & Edit -->
+                <button class="key hex-key disabled" data-num="B">B</button>
                 <button class="key small-key" data-op="log">LN</button>
                 <button class="key small-key" data-op="exp">eˣ</button>
                 <button class="key small-key" data-op="inv">1/x</button>
-
-                <!-- Row 2: Stack & Memory -->
-                <button class="key hex-key disabled" data-num="B">B</button>
-                <button class="key small-key" data-cmd="swap">x≂y</button>
-                <button class="key small-key" data-cmd="roll">R↓</button>
-                <button class="key small-key" data-cmd="sto">STO</button>
-                <button class="key small-key" data-cmd="rcl">RCL</button>
+                <button class="key small-key" data-cmd="eex">EEX</button>
                 <button class="key small-key orange-text" data-cmd="backspace">←</button>
 
-                <!-- Row 3: Enter & Ops -->
+                <!-- Row 3: Memory & Stack -->
                 <button class="key hex-key disabled" data-num="C">C</button>
-                <button class="key small-key wide-key" data-val="42">ANS</button>
-                <button class="key small-key" data-cmd="chs">CHS</button>
-                <button class="key small-key" data-cmd="eex">EEX</button>
+                <button class="key small-key" data-cmd="sto">STO</button>
+                <button class="key small-key" data-cmd="rcl">RCL</button>
+                <button class="key small-key" data-cmd="swap">x≂y</button>
+                <button class="key small-key" data-cmd="roll">R↓</button>
                 <button class="key small-key" data-cmd="clx">CLx</button>
 
-                <!-- Row 4: Num & Ops -->
+                <!-- Row 4: Constants & Num -->
                 <button class="key hex-key disabled" data-num="D">D</button>
-                <button class="key small-key" data-op="pow">yˣ</button>
+                <button class="key small-key" data-val="42">ANS</button>
                 <button class="key" data-num="7">7</button>
                 <button class="key" data-num="8">8</button>
                 <button class="key" data-num="9">9</button>
