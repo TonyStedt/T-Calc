@@ -28,7 +28,7 @@ body {
 
 .chassis {
     background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-    width: 380px;
+    width: 440px;
     padding: 20px;
     border-radius: 10px;
     box-shadow:
@@ -46,7 +46,7 @@ body {
     padding: 0 10px;
 }
 
-.hp-logo {
+.brand-logo {
     font-style: italic;
     font-weight: bold;
     font-size: 1.2rem;
@@ -98,8 +98,18 @@ body {
 
 .keypad {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 12px 8px;
+}
+
+.hex-key {
+    background: linear-gradient(to bottom, #2b2b2b, #1a1a1a);
+    color: #ddd;
+}
+
+.hex-key.disabled {
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .key {

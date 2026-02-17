@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HP RPN Calculator</title>
+    <title>T-Calc RPN Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <div class="calculator-container">
         <div class="chassis">
             <div class="brand">
-                <span class="hp-logo">hp</span>
+                <span class="brand-logo">T-Calc</span>
                 <span class="model">15C</span>
             </div>
 
@@ -28,6 +28,7 @@
 
             <div class="keypad">
                 <!-- Row 1: Advanced Math & Stack -->
+                <button class="key hex-key disabled" data-num="A">A</button>
                 <button class="key small-key" data-op="sqrt">√x</button>
                 <button class="key small-key" data-op="sqr">x²</button>
                 <button class="key small-key" data-op="log">LN</button>
@@ -35,6 +36,7 @@
                 <button class="key small-key" data-op="inv">1/x</button>
 
                 <!-- Row 2: Stack & Memory -->
+                <button class="key hex-key disabled" data-num="B">B</button>
                 <button class="key small-key" data-cmd="swap">x≂y</button>
                 <button class="key small-key" data-cmd="roll">R↓</button>
                 <button class="key small-key" data-cmd="sto">STO</button>
@@ -42,12 +44,14 @@
                 <button class="key small-key orange-text" data-cmd="backspace">←</button>
 
                 <!-- Row 3: Enter & Ops -->
+                <button class="key hex-key disabled" data-num="C">C</button>
                 <button class="key enter-key" data-cmd="enter">ENTER</button>
                 <button class="key small-key" data-cmd="chs">CHS</button>
                 <button class="key small-key" data-cmd="eex">EEX</button>
                 <button class="key small-key" data-cmd="clx">CLx</button>
 
                 <!-- Row 4: Num & Ops -->
+                <button class="key hex-key disabled" data-num="D">D</button>
                 <button class="key small-key" data-op="pow">yˣ</button>
                 <button class="key" data-num="7">7</button>
                 <button class="key" data-num="8">8</button>
@@ -55,6 +59,7 @@
                 <button class="key op-key" data-op="/">÷</button>
 
                 <!-- Row 5 -->
+                <button class="key hex-key disabled" data-num="E">E</button>
                 <button class="key small-key" data-val="pi">π</button>
                 <button class="key" data-num="4">4</button>
                 <button class="key" data-num="5">5</button>
@@ -62,6 +67,7 @@
                 <button class="key op-key" data-op="*">×</button>
 
                 <!-- Row 6 -->
+                <button class="key hex-key disabled" data-num="F">F</button>
                 <button class="key small-key" data-val="e">e</button>
                 <button class="key" data-num="1">1</button>
                 <button class="key" data-num="2">2</button>
