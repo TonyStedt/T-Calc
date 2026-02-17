@@ -1,0 +1,196 @@
+:root {
+    --bg-color: #e0e0e0;
+    --chassis-color: #2b2b2b;
+    --key-black: #1a1a1a;
+    --key-blue: #004080;
+    /* HP Blue */
+    --key-orange: #d4a017;
+    --lcd-bg: #9ca;
+    --lcd-text: #111;
+    --text-white: #eeeeee;
+    --text-gold: #d4a017;
+    --text-blue: #4fa3d1;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--bg-color);
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator-container {
+    perspective: 1000px;
+}
+
+.chassis {
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    width: 380px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    border-top: 2px solid #444;
+    border-bottom: 4px solid #000;
+}
+
+.brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.hp-logo {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ccc;
+    border: 1px solid #ccc;
+    padding: 0 4px;
+    border-radius: 2px;
+}
+
+.model {
+    color: #aaa;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.screen-bezel {
+    background-color: #000;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    border: 1px solid #444;
+}
+
+.lcd-screen {
+    background-color: var(--lcd-bg);
+    color: var(--lcd-text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2rem;
+    text-align: right;
+    padding: 5px 10px;
+    border-radius: 2px;
+    min-height: 40px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-indicator {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px 8px;
+}
+
+.key {
+    height: 40px;
+    border: none;
+    border-radius: 2px 2px 6px 6px;
+    /* Slanted look top */
+    background: linear-gradient(to bottom, #444, #222);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+        0 4px 0 #111,
+        0 5px 5px rgba(0, 0, 0, 0.4);
+    transition: transform 0.05s, box-shadow 0.05s;
+    transform-origin: center bottom;
+    /* Slanted effect simulation */
+    transform: perspective(500px) rotateX(10deg);
+}
+
+.key:active {
+    transform: perspective(500px) rotateX(15deg) translateY(2px);
+    box-shadow:
+        0 2px 0 #111,
+        0 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Key Colors */
+.wide-key {
+    grid-column: span 2;
+}
+
+.enter-key {
+    grid-column: span 2;
+    /* Enter is usually double height or width, here width */
+    background: linear-gradient(to bottom, #4fa3d1, #2c7da0);
+    transform: perspective(500px) rotateX(10deg);
+    /* Explicit reset for override check */
+}
+
+.enter-key:active {
+    background: linear-gradient(to bottom, #3b8bb9, #206080);
+}
+
+.op-key {
+    background: linear-gradient(to bottom, #eee, #ccc);
+    color: #111;
+}
+
+.small-key {
+    font-size: 0.75rem;
+    background: linear-gradient(to bottom, #333, #151515);
+}
+
+.orange-text {
+    color: var(--text-gold);
+}
+
+/* Base Toggles */
+.bottom-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
+.base-toggle {
+    display: flex;
+    gap: 5px;
+}
+
+.base-btn {
+    background: #222;
+    border: 1px solid #444;
+    color: #666;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.base-btn.active {
+    color: var(--text-gold);
+    border-color: var(--text-gold);
+}
+
+.extra-constants {
+    display: flex;
+    gap: 5px;
+}
