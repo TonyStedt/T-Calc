@@ -351,4 +351,33 @@ class RPNCalculator {
 // Initialize
 window.addEventListener('DOMContentLoaded', () => {
     new RPNCalculator();
+
+    // Info Modal Logic
+    const infoBtn = document.getElementById('info-btn');
+    const infoModal = document.getElementById('info-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const buildInfoText = document.getElementById('build-info-text');
+
+    if (infoBtn && infoModal && closeBtn && buildInfoText) {
+        // Automatically generated build date based on document last modified time
+        const buildDate = new Date(document.lastModified);
+        const formattedDate = buildDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) + ' ' + buildDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+        
+        buildInfoText.innerHTML = `Version 1.0 <br> Build: ${formattedDate}`;
+
+        infoBtn.addEventListener('click', () => {
+            infoModal.classList.remove('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            infoModal.classList.add('hidden');
+        });
+
+        // Close when clicking outside the modal content
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.classList.add('hidden');
+            }
+        });
+    }
 });

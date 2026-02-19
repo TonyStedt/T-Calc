@@ -15,8 +15,11 @@
     <div class="calculator-container">
         <div class="chassis">
             <div class="brand">
-                <span class="brand-logo">T-Calc</span>
-                <span class="model">15T</span>
+                <div class="brand-left">
+                    <span class="brand-logo">T-Calc</span>
+                    <span class="model">15T</span>
+                </div>
+                <button id="info-btn" class="info-btn" title="Information">i</button>
             </div>
 
             <div class="screen-bezel">
@@ -97,6 +100,20 @@
 
         </div>
     </div>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal hidden">
+        <div class="modal-content chassis">
+            <div class="modal-header">
+                <h2>T-Calc</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <p>The easy to use RPN calculator</p>
+            <p>by Tony Stedt</p>
+            <p class="build-info" id="build-info-text"></p>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

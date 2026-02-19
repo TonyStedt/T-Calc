@@ -46,6 +46,11 @@ body {
     padding: 0 10px;
 }
 
+.brand-left {
+    display: flex;
+    align-items: center;
+}
+
 .brand-logo {
     font-style: italic;
     font-weight: bold;
@@ -54,12 +59,36 @@ body {
     border: 1px solid #ccc;
     padding: 0 4px;
     border-radius: 2px;
+    margin-right: 10px;
 }
 
 .model {
     color: #aaa;
     font-family: monospace;
     letter-spacing: 1px;
+}
+
+.info-btn {
+    background: transparent;
+    border: 1px solid #aaa;
+    color: #aaa;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-style: italic;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.info-btn:hover {
+    color: var(--text-gold);
+    border-color: var(--text-gold);
 }
 
 .screen-bezel {
@@ -213,4 +242,86 @@ body {
 .extra-constants {
     display: flex;
     gap: 5px;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    width: 320px;
+    color: var(--text-white);
+    padding: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    font-family: 'Share Tech Mono', monospace;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    border-top: 2px solid #555;
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.95);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-gold);
+    font-size: 1.5rem;
+    text-shadow: 0 0 5px rgba(212, 160, 23, 0.3);
+}
+
+.close-btn {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #aaa;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+.modal-content p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+.build-info {
+    font-size: 0.85rem !important;
+    color: #777 !important;
+    margin-top: 25px !important;
+    border-top: 1px dashed #444;
+    padding-top: 15px;
 }
